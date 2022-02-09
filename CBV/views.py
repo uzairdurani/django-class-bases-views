@@ -1,9 +1,10 @@
+from pyexpat import model
 from django.shortcuts import render
 from django.views.generic.base import TemplateView,RedirectView
 from .models import student,Post
 from django.shortcuts import get_object_or_404
 from django.db.models import F
-
+from django.views.generic import DetailView
 # Create your views here.
 class newPage(TemplateView):
     template_name = 'newPage.html'
@@ -28,3 +29,9 @@ class SinglePostView(TemplateView):
         context =  super().get_context_data(**kwargs)
         context['posts'] = get_object_or_404(Post, id = self.kwargs.get('pk'))
         return context
+
+
+class modelDetailView(DetailView):
+  model = student
+  template_name = 'student_detail.html'
+  
