@@ -4,8 +4,32 @@ from django.views.generic.base import TemplateView,RedirectView
 from .models import student,Post
 from django.shortcuts import get_object_or_404
 from django.db.models import F
-from django.views.generic import DetailView
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 # Create your views here.
+
+class IndexView(ListView):
+  model = student
+  template_name = 'home.html'
+  paginate_by = 1
+
+
+
+class Genre(ListView):
+  model = student
+  template_name = 'genre.html'
+  def get_queryset(self):
+      return student.objects.filter(name__icontains=self.kwargs['genre'])
+
+
+
+
+
+
+
+
+
+
 class newPage(TemplateView):
     template_name = 'newPage.html'
     def get_context_data(self, **kwargs):
