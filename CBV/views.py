@@ -1,4 +1,6 @@
+from gc import get_objects
 from pyexpat import model
+from sre_constants import SUCCESS
 from django.shortcuts import render
 from django.views.generic.base import TemplateView,RedirectView
 from .models import student,Post
@@ -6,11 +8,19 @@ from django.shortcuts import get_object_or_404
 from django.db.models import F
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.views.generic.edit import FormView,CreateView
+from django.views.generic.edit import FormView,CreateView,UpdateView
 from .form import AddForm
 # Create your views here.
 
-
+class modelEditDetailView(UpdateView):
+   
+    model = student
+    form_class = AddForm
+    template_name = 'add.html'
+    success_url = '/' 
+        
+    
+    
 
 class AddBookView(CreateView):
     model = student
