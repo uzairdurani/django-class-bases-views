@@ -6,22 +6,27 @@ from django.shortcuts import get_object_or_404
 from django.db.models import F
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView,CreateView
 from .form import AddForm
 # Create your views here.
 
 
 
+class AddBookView(CreateView):
+    model = student
+    form_class = AddForm
+    template_name = 'add.html'
+    success_url = '/'
 
 
-class AddBookView(FormView):
-  template_name = 'add.html'
-  form_class = AddForm
-  success_url = '/'
+# class AddBookView(FormView):
+#   template_name = 'add.html'
+#   form_class = AddForm
+#   success_url = '/'
 
-  def form_valid(self, form) :
-      form.save()
-      return super().form_valid(form)
+#   def form_valid(self, form) :
+#       form.save()
+#       return super().form_valid(form)
 
 
 class IndexView(ListView):
